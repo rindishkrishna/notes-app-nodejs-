@@ -1,6 +1,6 @@
 const express= require('express');
 const Router = express.Router();
-const genres=require('../Models/Genres');
+const {genres}=require('../Models/Genres');
 const { check, validationResult } = require('express-validator');
 Router.get('/',async (req,res)=>{
     const genre= await genres.find();
