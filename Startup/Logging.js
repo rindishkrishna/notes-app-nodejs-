@@ -4,13 +4,9 @@ const Logger =winston.createLogger({
     transports: [
         new winston.transports.Console(),
         new winston.transports.File({
-            filename: 'Error.log',
+            filename: 'Errors.log',
             level: 'info'
-        }),
-        winston.add(new winston.transports.MongoDB({
-            db:'mongodb://localhost/logs',
-            options: {useUnifiedTopology: true}
-        }))
+        })
     ]
 });
 winston.exceptions.handle(
