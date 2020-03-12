@@ -5,4 +5,8 @@ module.exports=function () {
         console.error('private key not found');
         process.exit(1);
     }
+    if(!process.env.PORT){
+        console.error('Port not found');
+        process.exit(1);
+    }
 };
