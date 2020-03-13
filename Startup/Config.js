@@ -9,4 +9,8 @@ module.exports=function () {
         console.error('Port not found');
         process.exit(1);
     }
+    if(!process.env.MONGO_URL){
+        console.error('MONGOURL not found');
+        process.exit(1);
+    }
 };
