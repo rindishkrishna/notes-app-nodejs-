@@ -33,6 +33,8 @@ Router.post('/',[
     if(req.body.password !==req.body.confirmPassword) return res.status(400).send("incorrect confirm password");
     const salt =await bcrypt.genSalt(5);
     user.password =await bcrypt.hash(user.password ,salt);
+    const salt1 =await bcrypt.genSalt(5);
+    user.confirmPassword =await bcrypt.hash(user.confirmPassword ,salt1);
     await user.save();
     const token =user.auth();
     res.header('x-auth',token).send({
