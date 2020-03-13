@@ -42,5 +42,6 @@ Router.post('/',[
             name:user.name
         }
     )
+    res.send("Registered Successfully")
 }));
 module.exports=Router;

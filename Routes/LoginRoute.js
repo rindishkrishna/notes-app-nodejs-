@@ -5,7 +5,7 @@ const register =require('../Models/Register');
 const asyncvalidator =require('../Middleware/Async');
 const { check, validationResult } = require('express-validator');
 
-Router.post('/',
+Router.get('/',
     [
         check('email','Email is Required').isEmail(),
         check('name','username should have min. 5 characters').isLength({min:5}),
@@ -19,6 +19,11 @@ Router.post('/',
     const valid= await  bcrypt.compare(req.body.password ,user.password);
     if(!valid) return res.status(400).send("invalid email or password");
     const token =user.auth();
-    res.send(token);
+        res.header('x-auth',token).send({
+                _id:user._id,
+                name:user.name
+            }
+        );
+    res.send("login successful");
 }));
 module.exports=Router;
