@@ -3,6 +3,7 @@ const express= require('express');
 const Router = express.Router();
 const register =require('../Models/Register');
 const asyncvalidator =require('../Middleware/Async');
+const jwt = require("jsonwebtoken");
 const { check, validationResult } = require('express-validator');
 
 Router.get('/',
@@ -18,12 +19,7 @@ Router.get('/',
     if(!user) return res.status(400).send("invalid email or password");
     const valid= await  bcrypt.compare(req.body.password ,user.password);
     if(!valid) return res.status(400).send("invalid email or password");
-    const token =user.auth();
-        res.header('x-auth',token).send({
-                _id:user._id,
-                name:user.name
-            }
-        );
-    res.send("login successful");
+    const token =jwt.sign({_id: this._id},process.env.PRIVATEKEY);
+        res.header('x-auth',token).send("successful login");
 }));
 module.exports=Router;

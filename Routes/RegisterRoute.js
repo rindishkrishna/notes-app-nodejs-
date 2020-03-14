@@ -4,6 +4,7 @@ const express= require('express');
 const Router = express.Router();
 const asyncvalidator =require('../Middleware/Async');
 const auth =require('../Middleware/Auth');
+const jwt = require("jsonwebtoken");
 const { check, validationResult } = require('express-validator');
 
 Router.get('/',auth,asyncvalidator(async (req,res)=>{
@@ -36,12 +37,8 @@ Router.post('/',[
     const salt1 =await bcrypt.genSalt(5);
     user.confirmPassword =await bcrypt.hash(user.confirmPassword ,salt1);
     await user.save();
-    const token =user.auth();
-    res.header('x-auth',token).send({
-            _id:user._id,
-            name:user.name
-        }
-    );
-    res.send("Registered Successfully")
+    const token = jwt.sign({_id: this._id},process.env.PRIVATEKEY);
+    res.header('x-auth',token).status(200).send("successful Sign up");
+
 }));
 module.exports=Router;

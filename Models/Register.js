@@ -14,8 +14,5 @@ const Schema = new mongoose.Schema({
     confirmPassword:{type:String,
     required:true}
 });
-Schema.methods.auth =function(){
-    return jwt.sign({_id: this._id},process.env.PRIVATEKEY);
-};
 const Register = mongoose.model('Register',Schema);
 module.exports =Register;
