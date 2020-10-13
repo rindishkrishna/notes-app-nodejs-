@@ -2,7 +2,9 @@
  it is a notes app api with authentication made with nodejs + express + mongodb  
 
 # run 
-git clone and npm install
+git clone
+npm i
+npm start
 
 # env variables
 
