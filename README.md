@@ -1,7 +1,9 @@
 # notes-app
+
  it is a notes app api with authentication made with nodejs + express + mongodb  
 
 # run 
+
 git clone
 npm i
 npm start
